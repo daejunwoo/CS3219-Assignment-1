@@ -25,7 +25,11 @@ public class IgnoreHandler {
 		return _instance;
 	}
 
-	private void readIgnorewordsFile() {
+	public boolean isIgnored(String word) {
+		return this._ignoreList.contains(word);
+	}
+
+	public void readIgnorewordsFile() {
 		File keywordsFile = new File(IGNOREWORDS_FILE);
 		BufferedReader br = null;
 		try {

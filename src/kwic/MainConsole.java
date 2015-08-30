@@ -16,6 +16,9 @@ public class MainConsole {
 
 	public static void main(String[] args) {
 
+		IgnoreHandler ignoreWords = IgnoreHandler.getIgnoreHandler();
+		ignoreWords.readIgnorewordsFile();
+
 		inputList = new ArrayList<String>();
 
 		writeMessage(WELCOME_MESSAGE + EMPTY_LINE);
