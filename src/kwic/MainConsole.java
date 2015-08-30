@@ -26,7 +26,7 @@ public class MainConsole {
 		sc = new Scanner(System.in);
 
 		while (sc.hasNextLine()) {
-			inputList.add(sc.nextLine());
+			inputList.add(sc.nextLine().toLowerCase());
 		}
 	}
 

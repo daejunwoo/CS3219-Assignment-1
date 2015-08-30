@@ -11,7 +11,7 @@ import java.util.HashSet;
 public class IgnoreHandler {
 
 	private static final String IGNOREWORDS_FILE = "ignoreWords.txt";
-	private static HashSet<String> _ignoreList;
+	private HashSet<String> _ignoreList;
 	private static IgnoreHandler _instance;
 
 	private IgnoreHandler() {
