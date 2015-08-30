@@ -9,7 +9,6 @@ public class MainConsole {
 
 	private static final String EMPTY_LINE = "\n";
 	private static final String EMPTY_STRING = "";
-	private static final String BLANK_SPACE = " ";
 
 	private static ArrayList<String> inputList;
 	private static Scanner sc;
@@ -28,6 +27,9 @@ public class MainConsole {
 		while (sc.hasNextLine()) {
 			inputList.add(sc.nextLine().toLowerCase());
 		}
+
+		CircularShiftHandler circularShift = new CircularShiftHandler(inputList);
+		ArrayList<String[]> shiftedList = circularShift.circularShiftLine();
 	}
 
 	public static void writeMessage(String msg, String... args) {
