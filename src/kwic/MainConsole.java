@@ -8,7 +8,6 @@ public class MainConsole {
 	private static final String WELCOME_MESSAGE = "Enter input: ";
 
 	private static final String EMPTY_LINE = "\n";
-	private static final String EMPTY_STRING = "";
 
 	private static ArrayList<String> inputList;
 	private static Scanner sc;
