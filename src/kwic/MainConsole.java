@@ -29,6 +29,17 @@ public class MainConsole {
 
 		CircularShiftHandler circularShift = new CircularShiftHandler(inputList);
 		ArrayList<String[]> shiftedList = circularShift.circularShiftLine();
+
+		AlphabetizeHandler alphabetize = new AlphabetizeHandler(shiftedList);
+		ArrayList<String> alphabetizedList = alphabetize.alphabetizeLine();
+
+		SortHandler sort = new SortHandler(alphabetizedList);
+		ArrayList<String> sortedList = sort.sortLine();
+
+		for (int i = 0; i < sortedList.size(); i++) {
+			writeMessage(sortedList.get(i) + EMPTY_LINE);
+		}
+
 	}
 
 	public static void writeMessage(String msg, String... args) {

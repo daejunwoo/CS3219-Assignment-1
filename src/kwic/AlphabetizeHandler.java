@@ -16,7 +16,7 @@ public class AlphabetizeHandler {
 		this._ignoreList = IgnoreHandler.getIgnoreHandler();
 	}
 
-	public ArrayList<String> alphabetize() {
+	public ArrayList<String> alphabetizeLine() {
 
 		for (int a = 0; a < _shiftedList.size(); a++) {
 			String[] lineArray = _shiftedList.get(a);
