@@ -7,8 +7,8 @@ public class AlphabetizeHandler {
 
 	private Storage _storage;
 
-	public AlphabetizeHandler(Storage storage) {
-		_storage = storage;
+	public AlphabetizeHandler() {
+		this._storage = Storage.getStorage();
 	}
 
 	public void alphabetizeLine() {

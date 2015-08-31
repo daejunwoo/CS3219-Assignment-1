@@ -7,8 +7,8 @@ public class CircularShiftHandler {
 	private Storage _storage;
 	private static final String BLANK_SPACE = " ";
 
-	public CircularShiftHandler(Storage storage) {
-		_storage = storage;
+	public CircularShiftHandler() {
+		this._storage = Storage.getStorage();
 	}
 
 	public void circularShiftLine() {

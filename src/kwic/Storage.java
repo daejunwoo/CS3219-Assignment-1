@@ -10,12 +10,20 @@ public class Storage {
 	private static HashSet<String> _ignoredWords;
 	private static ArrayList<String> _alphabetizedList;
 	private static ArrayList<String> _sortedList;
+	private static Storage _instance;
 
 	public Storage() {
 		_inputList = new ArrayList<String>();
 		_ignoredWords = new HashSet<>();
 		_shiftedList = new ArrayList<String[]>();
 		_alphabetizedList = new ArrayList<String>();
+	}
+
+	public static Storage getStorage() {
+		if (_instance == null) {
+			_instance = new Storage();
+		}
+		return _instance;
 	}
 
 	public void addInputLine(String line) {

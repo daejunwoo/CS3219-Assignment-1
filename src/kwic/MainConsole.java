@@ -11,11 +11,12 @@ public class MainConsole {
 
 	private static ArrayList<String> inputList;
 	private static Scanner sc;
+	private static Storage _storage;
 
 	public static void main(String[] args) {
 
-		Storage storage = new Storage();
-		IgnoreHandler ignoreWords = new IgnoreHandler(storage);
+		_storage = Storage.getStorage();
+		IgnoreHandler ignoreWords = new IgnoreHandler();
 		ignoreWords.readIgnorewordsFile();
 
 		writeMessage(WELCOME_MESSAGE + EMPTY_LINE);
@@ -23,20 +24,20 @@ public class MainConsole {
 		sc = new Scanner(System.in);
 
 		while (sc.hasNextLine()) {
-			storage.addInputLine(sc.nextLine().toLowerCase());
+			Storage.getStorage().addInputLine(sc.nextLine().toLowerCase());
 		}
 
-		CircularShiftHandler circularShift = new CircularShiftHandler(storage);
+		CircularShiftHandler circularShift = new CircularShiftHandler();
 		circularShift.circularShiftLine();
 
-		AlphabetizeHandler alphabetize = new AlphabetizeHandler(storage);
+		AlphabetizeHandler alphabetize = new AlphabetizeHandler();
 		alphabetize.alphabetizeLine();
 
-		SortHandler sort = new SortHandler(storage);
+		SortHandler sort = new SortHandler();
 		sort.sortLine();
 
-		for (int i = 0; i < storage.getSortedList().size(); i++) {
-			writeMessage(storage.getSortedList().get(i) + EMPTY_LINE);
+		for (int i = 0; i < _storage.getSortedList().size(); i++) {
+			writeMessage(_storage.getSortedList().get(i) + EMPTY_LINE);
 		}
 
 	}

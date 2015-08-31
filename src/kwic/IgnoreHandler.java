@@ -10,10 +10,10 @@ import java.io.InputStreamReader;
 public class IgnoreHandler {
 
 	private static final String IGNOREWORDS_FILE = "ignoreWords.txt";
-	private Storage _storage;
+	private static Storage _storage;
 
-	public IgnoreHandler(Storage storage) {
-		this._storage = storage;
+	public IgnoreHandler() {
+		this._storage = Storage.getStorage();
 	}
 
 	public boolean isIgnored(String word) {

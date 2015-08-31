@@ -7,8 +7,8 @@ public class SortHandler {
 
 	private Storage _storage;
 
-	public SortHandler(Storage storage) {
-		_storage = storage;
+	public SortHandler() {
+		this._storage = Storage.getStorage();
 	}
 
 	public void sortLine() {
