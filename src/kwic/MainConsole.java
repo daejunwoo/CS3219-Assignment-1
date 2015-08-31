@@ -14,7 +14,10 @@ public class MainConsole {
 	private static Storage _storage;
 
 	public static void main(String[] args) {
+		sharedRepo();
+	}
 
+	public static void sharedRepo() {
 		_storage = Storage.getStorage();
 		IgnoreHandler ignoreWords = new IgnoreHandler();
 		ignoreWords.readIgnorewordsFile();
@@ -39,7 +42,6 @@ public class MainConsole {
 		for (int i = 0; i < _storage.getSortedList().size(); i++) {
 			writeMessage(_storage.getSortedList().get(i) + EMPTY_LINE);
 		}
-
 	}
 
 	public static void writeMessage(String msg, String... args) {
