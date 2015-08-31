@@ -14,30 +14,29 @@ public class MainConsole {
 
 	public static void main(String[] args) {
 
-		IgnoreHandler ignoreWords = IgnoreHandler.getIgnoreHandler();
+		Storage storage = new Storage();
+		IgnoreHandler ignoreWords = new IgnoreHandler(storage);
 		ignoreWords.readIgnorewordsFile();
-
-		inputList = new ArrayList<String>();
 
 		writeMessage(WELCOME_MESSAGE + EMPTY_LINE);
 
 		sc = new Scanner(System.in);
 
 		while (sc.hasNextLine()) {
-			inputList.add(sc.nextLine().toLowerCase());
+			storage.addInputLine(sc.nextLine().toLowerCase());
 		}
 
-		CircularShiftHandler circularShift = new CircularShiftHandler(inputList);
-		ArrayList<String[]> shiftedList = circularShift.circularShiftLine();
+		CircularShiftHandler circularShift = new CircularShiftHandler(storage);
+		circularShift.circularShiftLine();
 
-		AlphabetizeHandler alphabetize = new AlphabetizeHandler(shiftedList);
-		ArrayList<String> alphabetizedList = alphabetize.alphabetizeLine();
+		AlphabetizeHandler alphabetize = new AlphabetizeHandler(storage);
+		alphabetize.alphabetizeLine();
 
-		SortHandler sort = new SortHandler(alphabetizedList);
-		ArrayList<String> sortedList = sort.sortLine();
+		SortHandler sort = new SortHandler(storage);
+		sort.sortLine();
 
-		for (int i = 0; i < sortedList.size(); i++) {
-			writeMessage(sortedList.get(i) + EMPTY_LINE);
+		for (int i = 0; i < storage.getSortedList().size(); i++) {
+			writeMessage(storage.getSortedList().get(i) + EMPTY_LINE);
 		}
 
 	}

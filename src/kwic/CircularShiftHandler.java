@@ -4,28 +4,25 @@ import java.util.ArrayList;
 
 public class CircularShiftHandler {
 
-	private ArrayList<String> _inputList;
-	private IgnoreHandler _ignoreList;
-	private ArrayList<String[]> _shiftedList;
+	private Storage _storage;
 	private static final String BLANK_SPACE = " ";
 
-	public CircularShiftHandler(ArrayList<String> inputList) {
-		this._inputList = inputList;
-		this._ignoreList = IgnoreHandler.getIgnoreHandler();
-		this._shiftedList = new ArrayList<String[]>();
+	public CircularShiftHandler(Storage storage) {
+		_storage = storage;
 	}
 
-	public ArrayList<String[]> circularShiftLine() {
+	public void circularShiftLine() {
 
-		for (int a = 0; a < _inputList.size(); a++) {
-			String[] lineArray = _inputList.get(a).split(BLANK_SPACE);
+		for (int a = 0; a < _storage.getInputList().size(); a++) {
+			String[] lineArray = _storage.getInputList().get(a).split(BLANK_SPACE);
 			ArrayList<String> que = new ArrayList<String>();
 
 			for (int i = 0; i < lineArray.length; i++) {
 
 				String result[] = new String[lineArray.length];
 
-				if (!_ignoreList.isIgnored(lineArray[i])) { // is keyword
+				if (!_storage.getIgnoredWord().contains(lineArray[i])) { // is
+																			// keyword
 					for (int j = i; j < lineArray.length; j++) {
 						result[j - i] = lineArray[j];
 					}
@@ -35,13 +32,12 @@ public class CircularShiftHandler {
 					}
 
 					que.add(lineArray[i]);
-					_shiftedList.add(result);
+					_storage.addShiftedLine(result);
 
 				} else {
 					que.add(lineArray[i]);
 				}
 			}
 		}
-		return _shiftedList;
 	}
 }

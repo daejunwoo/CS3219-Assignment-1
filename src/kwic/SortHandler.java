@@ -5,14 +5,15 @@ import java.util.Collections;
 
 public class SortHandler {
 
-	private ArrayList<String> _alphabetizedList;
+	private Storage _storage;
 
-	public SortHandler(ArrayList<String> alphabetizedList) {
-		this._alphabetizedList = alphabetizedList;
+	public SortHandler(Storage storage) {
+		_storage = storage;
 	}
 
-	public ArrayList<String> sortLine() {
-		Collections.sort(_alphabetizedList);
-		return _alphabetizedList;
+	public void sortLine() {
+		ArrayList<String> tempList = _storage.getAlphabetizedList();
+		Collections.sort(tempList);
+		_storage.setSortedList(tempList);
 	}
 }

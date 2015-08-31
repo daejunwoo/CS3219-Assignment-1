@@ -6,27 +6,18 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.HashSet;
 
 public class IgnoreHandler {
 
 	private static final String IGNOREWORDS_FILE = "ignoreWords.txt";
-	private HashSet<String> _ignoreList;
-	private static IgnoreHandler _instance;
+	private Storage _storage;
 
-	private IgnoreHandler() {
-		this._ignoreList = new HashSet<String>();
-	}
-
-	public static IgnoreHandler getIgnoreHandler() {
-		if (_instance == null) {
-			_instance = new IgnoreHandler();
-		}
-		return _instance;
+	public IgnoreHandler(Storage storage) {
+		this._storage = storage;
 	}
 
 	public boolean isIgnored(String word) {
-		return this._ignoreList.contains(word);
+		return _storage.getIgnoredWord().contains(word);
 	}
 
 	public void readIgnorewordsFile() {
@@ -36,7 +27,7 @@ public class IgnoreHandler {
 			br = new BufferedReader(new InputStreamReader(new FileInputStream(keywordsFile)));
 			String line;
 			while ((line = br.readLine()) != null) {
-				_ignoreList.add(line);
+				_storage.addIgnoredWord(line);
 			}
 		} catch (FileNotFoundException e1) {
 
