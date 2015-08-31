@@ -1,6 +1,7 @@
 package kwic;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -15,11 +16,10 @@ public class MainConsole {
 	private static final String DESIGN2 = "2";
 	private static Scanner inputScanner;
 	private static Scanner fileScanner;
-	private static Storage _storage;
 
 	private static File file;
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws FileNotFoundException {
 
 		file = null;
 		while (file == null) {
@@ -33,7 +33,11 @@ public class MainConsole {
 
 		switch (inputDesign) {
 		case DESGIN1:
-			sharedRepo();
+			ShareRepository sr = new ShareRepository(file);
+			ArrayList<String> resultList = sr.sharedRepo();
+			for (int i = 0; i < resultList.size(); i++) {
+				writeMessage(resultList.get(i) + EMPTY_LINE);
+			}
 			break;
 		case DESIGN2:
 			break;
@@ -53,33 +57,6 @@ public class MainConsole {
 		} catch (Exception ex) {
 			writeMessage(INVALID_FILE + EMPTY_LINE);
 			return null;
-		}
-	}
-
-	public static void sharedRepo() {
-		_storage = Storage.getStorage();
-		IgnoreHandler ignoreWords = new IgnoreHandler();
-		ignoreWords.readIgnorewordsFile();
-		try {
-
-		} catch (Exception ex) {
-
-		}
-		while (fileScanner.hasNextLine()) {
-			Storage.getStorage().addInputLine(fileScanner.nextLine().toLowerCase());
-		}
-
-		CircularShiftHandler circularShift = new CircularShiftHandler();
-		circularShift.circularShiftLine();
-
-		AlphabetizeHandler alphabetize = new AlphabetizeHandler();
-		alphabetize.alphabetizeLine();
-
-		SortHandler sort = new SortHandler();
-		sort.sortLine();
-
-		for (int i = 0; i < _storage.getSortedList().size(); i++) {
-			writeMessage(_storage.getSortedList().get(i) + EMPTY_LINE);
 		}
 	}
 
