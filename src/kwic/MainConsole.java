@@ -14,9 +14,45 @@ public class MainConsole {
 	private static Storage _storage;
 
 	public static void main(String[] args) {
-		sharedRepo();
+		pipeAndFilter();
+		// sharedRepo();
 	}
 
+	public static void pipeAndFilter() {
+        sc = new Scanner(System.in);
+
+        // Enter movie titles or similar stuff
+        writeMessage("### Enter movie titles - terminate with empty line ###\n");
+
+        inputList = new ArrayList<String>();
+        String userInput = sc.nextLine();
+        while (!userInput.isEmpty()) {
+            inputList.add(userInput);
+            userInput = sc.nextLine();
+        }
+
+        // Enter words to ignore
+        writeMessage("### Enter words to ignore - terminate with empty line ###\n");
+        
+        IgnoreWordHandler wordsToIgnore = IgnoreWordHandler.getWordsToIgnore();
+        String ignoreWord = sc.nextLine();
+        while (!ignoreWord.isEmpty()) {
+            wordsToIgnore.addWordToIgnore(ignoreWord);
+            ignoreWord = sc.nextLine();
+        }
+
+        Alphabetizer alphabetizer = new Alphabetizer();
+        for (String str : inputList) {
+            CircularShifter shifter = new CircularShifter(str);
+            alphabetizer.addLines(shifter.getShifted());
+        }
+
+        String[] results = alphabetizer.getSorted();
+        for (String str : results) {
+        	writeMessage(str + "\n");
+        }
+	}
+	
 	public static void sharedRepo() {
 		_storage = Storage.getStorage();
 		IgnoreHandler ignoreWords = new IgnoreHandler();
