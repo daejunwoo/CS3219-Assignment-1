@@ -11,11 +11,11 @@ public class MainConsole {
 	private static ArrayList<String> inputList;
 	private static Scanner sc;
 
-	private static final String DESIGN_PROMPT = "1.Shared Repository" + EMPTY_LINE + "2. Pipe and Filter " + EMPTY_LINE
+	private static final String DESIGN_PROMPT = "1. Shared Repository" + EMPTY_LINE + "2. Pipe and Filter " + EMPTY_LINE
 			+ "Enter 1 or 2: ";
-	private static final String FILENAME_PROMPT = "Enter the file name with extention : ";
+	private static final String FILENAME_PROMPT = "Enter the file name with extension : ";
 	private static final String INVALID_FILE = "File name does not exist";
-	private static final String DESGIN1 = "1"; // shared repository
+	private static final String DESIGN1 = "1"; // shared repository
 	private static final String DESIGN2 = "2"; // pipe and filter
 	private static Scanner inputScanner;
 	private static Scanner fileScanner;
@@ -25,17 +25,19 @@ public class MainConsole {
 	public static void main(String[] args) throws FileNotFoundException {
 
 		file = null;
-		while (file == null) {
-			inputScanner = new Scanner(System.in);
-			file = getInputFile();
-		}
-
+		
 		writeMessage(DESIGN_PROMPT + EMPTY_LINE);
 
+		inputScanner = new Scanner(System.in);
+		
 		String inputDesign = inputScanner.next().trim();
 
 		switch (inputDesign) {
-		case DESGIN1:
+		case DESIGN1:	
+			while (file == null) {
+				file = getInputFile();
+			}
+			
 			ShareRepository sr = new ShareRepository(file);
 			ArrayList<String> resultList = sr.sharedRepo();
 			for (int i = 0; i < resultList.size(); i++) {
@@ -90,7 +92,7 @@ public class MainConsole {
 		writeMessage(FILENAME_PROMPT);
 
 		try {
-			File file = new File(inputScanner.nextLine());
+			File file = new File(inputScanner.next());
 			fileScanner = new Scanner(file);
 			return file;
 		} catch (Exception ex) {
