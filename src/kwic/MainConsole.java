@@ -36,11 +36,11 @@ public class MainConsole {
 
 		switch (inputDesign) {
 		case DESGIN1:
-			// ShareRepository sr = new ShareRepository(file);
-			// ArrayList<String> resultList = sr.sharedRepo();
-			// for (int i = 0; i < resultList.size(); i++) {
-			// writeMessage(resultList.get(i) + EMPTY_LINE);
-			// }
+			ShareRepository sr = new ShareRepository(file);
+			ArrayList<String> resultList = sr.sharedRepo();
+			for (int i = 0; i < resultList.size(); i++) {
+				writeMessage(resultList.get(i) + EMPTY_LINE);
+			}
 			break;
 		case DESIGN2:
 			pipeAndFilter();
