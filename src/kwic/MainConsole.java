@@ -1,82 +1,101 @@
 package kwic;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class MainConsole {
 
-	private static final String WELCOME_MESSAGE = "Enter input: ";
-
 	private static final String EMPTY_LINE = "\n";
-
 	private static ArrayList<String> inputList;
 	private static Scanner sc;
-	private static Storage _storage;
 
-	public static void main(String[] args) {
-		pipeAndFilter();
-		// sharedRepo();
+	private static final String DESIGN_PROMPT = "1.Shared Repository" + EMPTY_LINE + "2. TBC " + EMPTY_LINE
+			+ "Enter 1 or 2: ";
+	private static final String FILENAME_PROMPT = "Enter the file name with extention : ";
+	private static final String INVALID_FILE = "File name does not exist";
+	private static final String DESGIN1 = "1"; // shared repository
+	private static final String DESIGN2 = "2";
+	private static Scanner inputScanner;
+	private static Scanner fileScanner;
+
+	private static File file;
+
+	public static void main(String[] args) throws FileNotFoundException {
+
+		file = null;
+		while (file == null) {
+			inputScanner = new Scanner(System.in);
+			file = getInputFile();
+		}
+
+		writeMessage(DESIGN_PROMPT + EMPTY_LINE);
+
+		String inputDesign = inputScanner.next().trim();
+
+		switch (inputDesign) {
+		case DESGIN1:
+			// ShareRepository sr = new ShareRepository(file);
+			// ArrayList<String> resultList = sr.sharedRepo();
+			// for (int i = 0; i < resultList.size(); i++) {
+			// writeMessage(resultList.get(i) + EMPTY_LINE);
+			// }
+			break;
+		case DESIGN2:
+			pipeAndFilter();
+			break;
+		default:
+			break;
+		}
 	}
 
 	public static void pipeAndFilter() {
-        sc = new Scanner(System.in);
-
-        // Enter movie titles or similar stuff
-        writeMessage("### Enter movie titles - terminate with empty line ###\n");
-
-        inputList = new ArrayList<String>();
-        String userInput = sc.nextLine();
-        while (!userInput.isEmpty()) {
-            inputList.add(userInput);
-            userInput = sc.nextLine();
-        }
-
-        // Enter words to ignore
-        writeMessage("### Enter words to ignore - terminate with empty line ###\n");
-        
-        IgnoreWordHandler wordsToIgnore = IgnoreWordHandler.getWordsToIgnore();
-        String ignoreWord = sc.nextLine();
-        while (!ignoreWord.isEmpty()) {
-            wordsToIgnore.addWordToIgnore(ignoreWord);
-            ignoreWord = sc.nextLine();
-        }
-
-        Alphabetizer alphabetizer = new Alphabetizer();
-        for (String str : inputList) {
-            CircularShifter shifter = new CircularShifter(str);
-            alphabetizer.addLines(shifter.getShifted());
-        }
-
-        String[] results = alphabetizer.getSorted();
-        for (String str : results) {
-        	writeMessage(str + "\n");
-        }
-	}
-	
-	public static void sharedRepo() {
-		_storage = Storage.getStorage();
-		IgnoreHandler ignoreWords = new IgnoreHandler();
-		ignoreWords.readIgnorewordsFile();
-
-		writeMessage(WELCOME_MESSAGE + EMPTY_LINE);
-
 		sc = new Scanner(System.in);
 
-		while (sc.hasNextLine()) {
-			Storage.getStorage().addInputLine(sc.nextLine().toLowerCase());
+		// Enter movie titles or similar stuff
+		writeMessage("### Enter movie titles - terminate with empty line ###\n");
+
+		inputList = new ArrayList<String>();
+		String userInput = sc.nextLine();
+		while (!userInput.isEmpty()) {
+			inputList.add(userInput);
+			userInput = sc.nextLine();
 		}
 
-		CircularShiftHandler circularShift = new CircularShiftHandler();
-		circularShift.circularShiftLine();
+		// Enter words to ignore
+		writeMessage("### Enter words to ignore - terminate with empty line ###\n");
 
-		AlphabetizeHandler alphabetize = new AlphabetizeHandler();
-		alphabetize.alphabetizeLine();
+		IgnoreWordHandler wordsToIgnore = IgnoreWordHandler.getWordsToIgnore();
+		String ignoreWord = sc.nextLine();
+		while (!ignoreWord.isEmpty()) {
+			wordsToIgnore.addWordToIgnore(ignoreWord);
+			ignoreWord = sc.nextLine();
+		}
 
-		SortHandler sort = new SortHandler();
-		sort.sortLine();
+		Alphabetizer alphabetizer = new Alphabetizer();
+		for (String str : inputList) {
+			CircularShifter shifter = new CircularShifter(str);
+			alphabetizer.addLines(shifter.getShifted());
+		}
 
-		for (int i = 0; i < _storage.getSortedList().size(); i++) {
-			writeMessage(_storage.getSortedList().get(i) + EMPTY_LINE);
+		String[] results = alphabetizer.getSorted();
+		for (String str : results) {
+			writeMessage(str + "\n");
+		}
+	}
+
+	public static File getInputFile() {
+
+		writeMessage(FILENAME_PROMPT);
+
+		try {
+			File file = new File(inputScanner.nextLine());
+			fileScanner = new Scanner(file);
+			return file;
+		} catch (Exception ex) {
+			writeMessage(INVALID_FILE + EMPTY_LINE);
+			return null;
 		}
 	}
 
