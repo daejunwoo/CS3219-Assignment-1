@@ -11,12 +11,12 @@ public class MainConsole {
 	private static ArrayList<String> inputList;
 	private static Scanner sc;
 
-	private static final String DESIGN_PROMPT = "1.Shared Repository" + EMPTY_LINE + "2. TBC " + EMPTY_LINE
+	private static final String DESIGN_PROMPT = "1.Shared Repository" + EMPTY_LINE + "2. Pipe and Filter " + EMPTY_LINE
 			+ "Enter 1 or 2: ";
 	private static final String FILENAME_PROMPT = "Enter the file name with extention : ";
 	private static final String INVALID_FILE = "File name does not exist";
 	private static final String DESGIN1 = "1"; // shared repository
-	private static final String DESIGN2 = "2";
+	private static final String DESIGN2 = "2"; // pipe and filter
 	private static Scanner inputScanner;
 	private static Scanner fileScanner;
 
