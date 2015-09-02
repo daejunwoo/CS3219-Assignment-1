@@ -8,6 +8,9 @@ import java.util.Scanner;
 public class MainConsole {
 
 	private static final String EMPTY_LINE = "\n";
+	private static ArrayList<String> inputList;
+	private static Scanner sc;
+
 	private static final String DESIGN_PROMPT = "1.Shared Repository" + EMPTY_LINE + "2. TBC " + EMPTY_LINE
 			+ "Enter 1 or 2: ";
 	private static final String FILENAME_PROMPT = "Enter the file name with extention : ";
@@ -40,9 +43,45 @@ public class MainConsole {
 			}
 			break;
 		case DESIGN2:
+			pipeAndFilter();
 			break;
 		default:
 			break;
+		}
+	}
+
+	public static void pipeAndFilter() {
+		sc = new Scanner(System.in);
+
+		// Enter movie titles or similar stuff
+		writeMessage("### Enter movie titles - terminate with empty line ###\n");
+
+		inputList = new ArrayList<String>();
+		String userInput = sc.nextLine();
+		while (!userInput.isEmpty()) {
+			inputList.add(userInput);
+			userInput = sc.nextLine();
+		}
+
+		// Enter words to ignore
+		writeMessage("### Enter words to ignore - terminate with empty line ###\n");
+
+		IgnoreWordHandler wordsToIgnore = IgnoreWordHandler.getWordsToIgnore();
+		String ignoreWord = sc.nextLine();
+		while (!ignoreWord.isEmpty()) {
+			wordsToIgnore.addWordToIgnore(ignoreWord);
+			ignoreWord = sc.nextLine();
+		}
+
+		Alphabetizer alphabetizer = new Alphabetizer();
+		for (String str : inputList) {
+			CircularShifter shifter = new CircularShifter(str);
+			alphabetizer.addLines(shifter.getShifted());
+		}
+
+		String[] results = alphabetizer.getSorted();
+		for (String str : results) {
+			writeMessage(str + "\n");
 		}
 	}
 
