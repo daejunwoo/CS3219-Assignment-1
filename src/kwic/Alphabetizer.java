@@ -3,6 +3,12 @@ package kwic;
 import java.util.ArrayList;
 import java.util.Collections;
 
+/**
+ * 
+ * @author wgoh
+ *
+ */
+
 public class Alphabetizer {
 	private ArrayList<String> _lines;
 

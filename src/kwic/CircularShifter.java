@@ -5,6 +5,12 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
+/**
+ * 
+ * @author wgoh
+ *
+ */
+
 public class CircularShifter {
 	public static String BLANK_SPACE = " ";
     private String _line;

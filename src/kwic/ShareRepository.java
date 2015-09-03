@@ -23,7 +23,7 @@ public class ShareRepository {
 
 	public ArrayList<String> sharedRepo() throws FileNotFoundException {
 		_fileScanner = new Scanner(_file);
-		IgnoreHandler ignoreWords = new IgnoreHandler();
+		IgnoreWords ignoreWords = new IgnoreWords();
 		ignoreWords.readIgnorewordsFile();
 		try {
 
