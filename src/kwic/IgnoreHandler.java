@@ -7,6 +7,11 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
+/**
+ * 
+ * @author Alan
+ *
+ */
 public class IgnoreHandler {
 
 	private static final String IGNOREWORDS_FILE = "ignoreWords.txt";

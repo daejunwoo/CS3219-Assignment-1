@@ -1,16 +1,13 @@
 package kwic;
 
-/**
- * 
- * @author Alan
- *
- */
+import java.util.HashSet;
+
 public class IgnoreWordHandler {
 	private static IgnoreWordHandler _instance;
-	private Storage _storage;
+	private HashSet<String> _wordsToIgnore;
 
 	private IgnoreWordHandler() {
-		this._storage = Storage.getStorage();
+		this._wordsToIgnore = new HashSet<String>();
 	}
 
 	public static IgnoreWordHandler getWordsToIgnore() {
@@ -23,11 +20,16 @@ public class IgnoreWordHandler {
 
 	public void addWordToIgnore(String word) {
 		assert(word != null);
-		this._storage.addIgnoredWord(word);
+		this._wordsToIgnore.add(word);
+	}
+
+	public void removeWordToIgnore(String word) {
+		assert(word != null);
+		this._wordsToIgnore.remove(word);
 	}
 
 	public boolean isWordIgnored(String word) {
 		assert(word != null);
-		return this._storage.getIgnoredWord().contains(word);
+		return this._wordsToIgnore.contains(word);
 	}
 }
