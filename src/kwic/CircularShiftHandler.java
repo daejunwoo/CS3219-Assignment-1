@@ -3,7 +3,7 @@ package kwic;
 import java.util.ArrayList;
 
 /**
- * 
+ * This class handles all the circular shifting process.
  * @author Alan
  *
  */

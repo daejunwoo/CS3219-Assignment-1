@@ -1,7 +1,5 @@
 package kwic;
 
-import java.util.HashSet;
-
 /**
  * 
  * @author Alan

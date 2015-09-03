@@ -14,7 +14,7 @@ public class ShareRepository {
 
 	private static Storage _storage;
 	private static Scanner _fileScanner;
-	private static File _file;
+	private File _file;
 
 	public ShareRepository(File file) {
 		this._file = file;

@@ -25,19 +25,19 @@ public class MainConsole {
 	public static void main(String[] args) throws FileNotFoundException {
 
 		file = null;
-		
+
 		writeMessage(DESIGN_PROMPT + EMPTY_LINE);
 
 		inputScanner = new Scanner(System.in);
-		
+
 		String inputDesign = inputScanner.next().trim();
 
 		switch (inputDesign) {
-		case DESIGN1:	
+		case DESIGN1:
 			while (file == null) {
 				file = getInputFile();
 			}
-			
+
 			ShareRepository sr = new ShareRepository(file);
 			ArrayList<String> resultList = sr.sharedRepo();
 			for (int i = 0; i < resultList.size(); i++) {

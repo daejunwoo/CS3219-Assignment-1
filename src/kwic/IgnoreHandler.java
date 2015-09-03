@@ -10,7 +10,7 @@ import java.io.InputStreamReader;
 public class IgnoreHandler {
 
 	private static final String IGNOREWORDS_FILE = "ignoreWords.txt";
-	private static Storage _storage;
+	private Storage _storage;
 
 	public IgnoreHandler() {
 		this._storage = Storage.getStorage();
