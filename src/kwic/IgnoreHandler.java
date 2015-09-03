@@ -17,7 +17,7 @@ public class IgnoreHandler {
 	}
 
 	public boolean isIgnored(String word) {
-		return _storage.getIgnoredWord().contains(word);
+		return this._storage.getIgnoredWord().contains(word);
 	}
 
 	public void readIgnorewordsFile() {
@@ -27,7 +27,7 @@ public class IgnoreHandler {
 			br = new BufferedReader(new InputStreamReader(new FileInputStream(keywordsFile)));
 			String line;
 			while ((line = br.readLine()) != null) {
-				_storage.addIgnoredWord(line);
+				this._storage.addIgnoredWord(line);
 			}
 		} catch (FileNotFoundException e1) {
 

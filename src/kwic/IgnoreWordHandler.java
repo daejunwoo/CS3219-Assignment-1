@@ -2,33 +2,34 @@ package kwic;
 
 import java.util.HashSet;
 
+/**
+ * 
+ * @author Alan
+ *
+ */
 public class IgnoreWordHandler {
 	private static IgnoreWordHandler _instance;
-    private HashSet<String> _wordsToIgnore;
-    private IgnoreWordHandler() {
-        this._wordsToIgnore = new HashSet<String>();
-    }
+	private Storage _storage;
 
-    public static IgnoreWordHandler getWordsToIgnore() {
-        if (_instance == null) {
-            _instance = new IgnoreWordHandler();
-        }
+	private IgnoreWordHandler() {
+		this._storage = Storage.getStorage();
+	}
 
-        return _instance;
-    }
+	public static IgnoreWordHandler getWordsToIgnore() {
+		if (_instance == null) {
+			_instance = new IgnoreWordHandler();
+		}
 
-    public void addWordToIgnore(String word) {
-        assert(word != null);
-        this._wordsToIgnore.add(word);
-    }
+		return _instance;
+	}
 
-    public void removeWordToIgnore(String word) {
-        assert(word != null);
-        this._wordsToIgnore.remove(word);
-    }
+	public void addWordToIgnore(String word) {
+		assert(word != null);
+		this._storage.addIgnoredWord(word);
+	}
 
-    public boolean isWordIgnored(String word) {
-        assert(word != null);
-        return this._wordsToIgnore.contains(word);
-    }
+	public boolean isWordIgnored(String word) {
+		assert(word != null);
+		return this._storage.getIgnoredWord().contains(word);
+	}
 }

@@ -1,5 +1,10 @@
 package kwic;
 
+/**
+ * 
+ * @author Alan
+ *
+ */
 public class AlphabetizeHandler {
 
 	private static final String EMPTY_STRING = "";

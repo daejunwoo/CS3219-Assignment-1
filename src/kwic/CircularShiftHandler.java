@@ -2,6 +2,11 @@ package kwic;
 
 import java.util.ArrayList;
 
+/**
+ * 
+ * @author Alan
+ *
+ */
 public class CircularShiftHandler {
 
 	private Storage _storage;

@@ -3,6 +3,11 @@ package kwic;
 import java.util.ArrayList;
 import java.util.Collections;
 
+/**
+ * 
+ * @author Alan
+ *
+ */
 public class SortHandler {
 
 	private Storage _storage;

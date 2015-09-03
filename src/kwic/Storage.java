@@ -3,6 +3,11 @@ package kwic;
 import java.util.ArrayList;
 import java.util.HashSet;
 
+/**
+ * 
+ * @author Alan
+ *
+ */
 public class Storage {
 
 	private static ArrayList<String> _inputList;
